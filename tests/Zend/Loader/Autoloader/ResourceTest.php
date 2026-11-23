@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,8 +27,8 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Loader
  */
+#[Group('Zend_Loader')]
 class Zend_Loader_Autoloader_ResourceTest extends PHPUnit\Framework\TestCase
 {
     protected $loaders;
@@ -344,9 +344,7 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit\Framework\TestCase
         $this->assertInstanceOf(FooBar_Model_ZendLoaderAutoloaderResourceMethodOverloading::class, $test);
     }
 
-    /**
-     * @group ZF-7473
-     */
+    #[Group('ZF-7473')]
     public function testAutoloaderShouldReceiveNamespaceWithTrailingUnderscore()
     {
         $al      = Zend_Loader_Autoloader::getInstance();
@@ -358,9 +356,7 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit\Framework\TestCase
         $this->assertSame($this->loader, $loader);
     }
 
-    /**
-     * @group ZF-7501
-     */
+    #[Group('ZF-7501')]
     public function testAutoloaderShouldTrimResourceTypePathsForTrailingPathSeparator()
     {
         $this->loader->addResourceType('models', 'models/', 'Model');
@@ -368,9 +364,7 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit\Framework\TestCase
         $this->assertEquals($this->loader->getBasePath() . '/models', $resources['models']['path']);
     }
 
-    /**
-     * @group ZF-6727
-     */
+    #[Group('ZF-6727')]
     public function testAutoloaderResourceGetClassPath()
     {
         $this->loader->addResourceTypes(array(
@@ -381,10 +375,8 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit\Framework\TestCase
         $this->assertFalse(strpos($path, '//'));
     }
 
-    /**
-     * @group ZF-8364
-     * @group ZF-6727
-     */
+    #[Group('ZF-8364')]
+    #[Group('ZF-6727')]
     public function testAutoloaderResourceGetClassPathReturnFalse()
     {
         $this->loader->addResourceTypes(array(
@@ -394,9 +386,7 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit\Framework\TestCase
         $this->assertFalse($path);
     }
 
-    /**
-     * @group ZF-10836
-     */
+    #[Group('ZF-10836')]
     public function testConstructorAcceptsNamespaceKeyInAnyOrder()
     {
         // namespace is after resourceTypes - fails in ZF 1.11.1
@@ -429,9 +419,7 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit\Framework\TestCase
         $this->assertEquals($loader1, $loader2);
     }
 
-    /**
-     * @group ZF-11219
-     */
+    #[Group('ZF-11219')]
     public function testMatchesMultiLevelNamespaces()
     {
         $this->loader->setNamespace('Foo_Bar')

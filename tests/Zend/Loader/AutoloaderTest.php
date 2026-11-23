@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,8 +27,8 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Loader
  */
+#[Group('Zend_Loader')]
 class Zend_Loader_AutoloaderTest extends PHPUnit\Framework\TestCase
 {
     protected $loaders;
@@ -180,9 +180,7 @@ class Zend_Loader_AutoloaderTest extends PHPUnit\Framework\TestCase
         $this->autoloader->unregisterNamespace($o);
     }
 
-    /**
-     * @group ZF-6536
-     */
+    #[Group('ZF-6536')]
     public function testWarningSuppressionShouldBeDisabledByDefault()
     {
         $this->assertFalse($this->autoloader->suppressNotFoundWarnings());
@@ -376,9 +374,7 @@ class Zend_Loader_AutoloaderTest extends PHPUnit\Framework\TestCase
         $this->assertFalse(class_exists($class, false));
     }
 
-    /**
-     * @group ZF-10024
-     */
+    #[Group('ZF-10024')]
     public function testClosuresRegisteredWithAutoloaderShouldBeUtilized()
     {
         $closure = require_once dirname(__FILE__) . '/_files/AutoloaderClosure.php';
@@ -386,9 +382,7 @@ class Zend_Loader_AutoloaderTest extends PHPUnit\Framework\TestCase
         $this->assertTrue(Zend_Loader_Autoloader::autoload('AutoloaderTest_AutoloaderClosure'));
     }
 
-    /**
-     * @group ZF-11219
-     */
+    #[Group('ZF-11219')]
     public function testRetrievesAutoloadersFromLongestMatchingNamespace()
     {
         $this->autoloader->pushAutoloader(array($this, 'autoloadFirstLevel'), 'Level1_')
@@ -400,9 +394,7 @@ class Zend_Loader_AutoloaderTest extends PHPUnit\Framework\TestCase
         $this->assertEquals(array($this, 'autoloadSecondLevel'), $al);
     }
 
-    /**
-     * @group ZF-10136
-     */
+    #[Group('ZF-10136')]
     public function testMergedAutoloadersWithoutNamespace()
     {
         $this->autoloader

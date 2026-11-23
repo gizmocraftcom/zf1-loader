@@ -19,7 +19,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,8 +28,8 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Loader
  */
+#[Group('Zend_Loader')]
 class Zend_LoaderTest extends PHPUnit\Framework\TestCase
 {
     protected $errorHandler;
@@ -435,9 +436,7 @@ class Zend_LoaderTest extends PHPUnit\Framework\TestCase
         set_include_path($saveIncludePath);
     }
 
-    /**
-     * @group ZF-6605
-     */
+    #[Group('ZF-6605')]
     public function testRegisterAutoloadShouldEnableZendLoaderAutoloaderAsFallbackAutoloader()
     {
         if (!function_exists('spl_autoload_register')) {
@@ -462,19 +461,15 @@ class Zend_LoaderTest extends PHPUnit\Framework\TestCase
         }
     }
 
-    /**
-     * @group ZF-8200
-     * @doesNotPerformAssertions
-     */
+    #[Group('ZF-8200')]
+    #[DoesNotPerformAssertions]
     public function testLoadClassShouldAllowLoadingPhpNamespacedClasses()
     {
         Zend_Loader::loadClass('\Zfns\Foo', array(dirname(__FILE__) . '/Loader/_files'));
     }
 
-    /**
-     * @group ZF-7271
-     * @group ZF-8913
-     */
+    #[Group('ZF-7271')]
+    #[Group('ZF-8913')]
     public function testIsReadableShouldHonorStreamDefinitions()
     {
         $pharFile = dirname(__FILE__) . '/Loader/_files/Zend_LoaderTest.phar';
@@ -486,9 +481,7 @@ class Zend_LoaderTest extends PHPUnit\Framework\TestCase
         unset($phar);
     }
 
-    /**
-     * @group ZF-8913
-     */
+    #[Group('ZF-8913')]
     public function testIsReadableShouldNotLockWhenTestingForNonExistantFileInPhar()
     {
         $pharFile = dirname(__FILE__) . '/Loader/_files/Zend_LoaderTest.phar';
@@ -500,9 +493,7 @@ class Zend_LoaderTest extends PHPUnit\Framework\TestCase
         unset($phar);
     }
 
-    /**
-     * @group ZF-7271
-     */
+    #[Group('ZF-7271')]
     public function testExplodeIncludePathProperlyIdentifiesStreamSchemes()
     {
         if (PATH_SEPARATOR != ':') {
@@ -519,9 +510,7 @@ class Zend_LoaderTest extends PHPUnit\Framework\TestCase
         ), $paths);
     }
 
-    /**
-     * @group ZF-9100
-     */
+    #[Group('ZF-9100')]
     public function testIsReadableShouldReturnTrueForAbsolutePaths()
     {
         set_include_path(dirname(__FILE__) . '../../');
@@ -529,11 +518,9 @@ class Zend_LoaderTest extends PHPUnit\Framework\TestCase
         $this->assertTrue(Zend_Loader::isReadable($path));
     }
 
-    /**
-     * @group ZF-9263
-     * @group ZF-9166
-     * @group ZF-9306
-     */
+    #[Group('ZF-9263')]
+    #[Group('ZF-9166')]
+    #[Group('ZF-9306')]
     public function testIsReadableShouldFailEarlyWhenProvidedInvalidWindowsAbsolutePath()
     {
         if (strtoupper(substr(PHP_OS, 0, 3)) != 'WIN') {

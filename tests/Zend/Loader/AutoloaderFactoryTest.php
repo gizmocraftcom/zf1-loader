@@ -18,6 +18,7 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+use PHPUnit\Framework\Attributes\Group;
 
 /*
  * Preload a number of classes to ensure they're available once we've disabled
@@ -41,8 +42,8 @@ class_exists('PHPUnit\Framework\Constraint\Exception');
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Loader
  */
+#[Group('Loader')]
 class Zend_Loader_AutoloaderFactoryTest extends PHPUnit\Framework\TestCase
 {
     protected $loaders;

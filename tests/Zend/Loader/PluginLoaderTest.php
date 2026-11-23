@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test class for Zend_Loader_PluginLoader.
@@ -29,8 +29,8 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Loader
  */
+#[Group('Zend_Loader')]
 class Zend_Loader_PluginLoaderTest extends PHPUnit\Framework\TestCase
 {
     protected $_includeCache;
@@ -348,9 +348,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('ZfTest_FormSubmit', $loader->getClassName('FormSubmit'));
     }
 
-    /**
-     * @group ZF-2741
-     */
+    #[Group('ZF-2741')]
     public function testWin32UnderscoreSpacedShortNamesWillLoad()
     {
         $loader = new Zend_Loader_PluginLoader(array());
@@ -365,17 +363,13 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit\Framework\TestCase
         $this->assertEquals($className, $loader->getClassName('Word_UnderscoreToDash'));
     }
 
-    /**
-     * @group ZF-4670
-     */
+    #[Group('ZF-4670')]
     public function testIncludeCacheShouldBeNullByDefault()
     {
         $this->assertNull(Zend_Loader_PluginLoader::getIncludeFileCache());
     }
 
-    /**
-     * @group ZF-4670
-     */
+    #[Group('ZF-4670')]
     public function testPluginLoaderShouldAllowSpecifyingIncludeFileCache()
     {
         $cacheFile = $this->_includeCache;
@@ -384,9 +378,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit\Framework\TestCase
         $this->assertEquals($cacheFile, Zend_Loader_PluginLoader::getIncludeFileCache());
     }
 
-    /**
-     * @group ZF-4670
-     */
+    #[Group('ZF-4670')]
     public function testPluginLoaderShouldThrowExceptionWhenPathDoesNotExist()
     {
         $this->expectException(\Zend_Loader_PluginLoader_Exception::class);
@@ -397,9 +389,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit\Framework\TestCase
         $this->fail('Should not allow specifying invalid cache file path');
     }
 
-    /**
-     * @group ZF-4670
-     */
+    #[Group('ZF-4670')]
     public function testPluginLoaderShouldAppendIncludeCacheWhenClassIsFound()
     {
         $cacheFile = $this->_includeCache;
@@ -418,9 +408,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit\Framework\TestCase
         $this->assertStringContainsString('CacheTestFile.php', $cache);
     }
 
-    /**
-     * @group ZF-5208
-     */
+    #[Group('ZF-5208')]
     public function testStaticRegistryNamePersistsInDifferentLoaderObjects()
     {
         $loader1 = new Zend_Loader_PluginLoader(array(), 'PluginLoaderStaticNamespace');
@@ -432,9 +420,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit\Framework\TestCase
         ), $loader2->getPaths());
     }
 
-    /**
-     * @group ZF-4697
-     */
+    #[Group('ZF-4697')]
     public function testClassFilesGrabCorrectPathForLoadedClasses()
     {
         require_once __DIR__ . '/../View/Helper/DeclareVarsHelper.php';
@@ -456,9 +442,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit\Framework\TestCase
         $this->assertStringContainsString($expected, $classPath);
     }
 
-    /**
-     * @group ZF-7350
-     */
+    #[Group('ZF-7350')]
     public function testPrefixesEndingInBackslashDenoteNamespacedClasses()
     {
         $loader = new Zend_Loader_PluginLoader(array());
@@ -473,9 +457,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('Zfns\\Foo', $loader->getClassName('Foo'));
     }
 
-    /**
-     * @group ZF-9721
-     */
+    #[Group('ZF-9721')]
     public function testRemovePrefixPathThrowsExceptionIfPathNotRegisteredInPrefix()
     {
         try {
@@ -489,9 +471,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit\Framework\TestCase
         $this->assertCount(1, $loader->getPaths('My_Namespace_'));
     }
 
-    /**
-     * @group ZF-11330
-     */
+    #[Group('ZF-11330')]
     public function testLoadClassesWithBackslashInName()
     {
         $loader = new Zend_Loader_PluginLoader(array());
