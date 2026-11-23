@@ -5,5 +5,3 @@ parameters:
     excludePaths:
         - %rootDir%/../../../tests/*
         - %rootDir%/../../../vendor/*
-    ignoreErrors:
-        - '#Variable \$className might not be defined\.#'
